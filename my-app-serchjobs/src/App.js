@@ -1,22 +1,19 @@
-
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Components.jsx/Home';
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./Components.jsx/Home";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import SearchCompanyName from "./Components.jsx/SearchCompanyName";
 
 
 function App() {
-
- 
-
-   return (
-    <div className="App">
-      <h1>getting started</h1>
-      <Home/>
-  
-    </div>
-   );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:companyName" element={<SearchCompanyName/>} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
 
 export default App;
