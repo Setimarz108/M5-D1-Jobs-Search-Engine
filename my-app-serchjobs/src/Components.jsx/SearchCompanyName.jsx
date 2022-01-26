@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Form, Col, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { ConstructionRounded } from "@mui/icons-material";
+import AddButton from "./AddButton";
+
 
 
 function SearchCompanyName() {
@@ -47,8 +48,13 @@ function SearchCompanyName() {
               <Col className="">
                 {" "}
                 <h1>{job.title}</h1>
-                <Link to={"/" + job.company_name}>
-                  <h3 style={{color:"salmon"}}>{job.company_name}</h3></Link>
+                <div className="d-flex align-center">
+                      <Link to={"/" + job.company_name}>
+                        <h3 style={{ color: "salmon" }}>{job.company_name}</h3>
+                      </Link>
+
+                     <AddButton/>
+                    </div>
                 <h3>{job.category}</h3>
                <h6>{job.candidate_required_location}</h6>
               </Col>
