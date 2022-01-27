@@ -3,51 +3,32 @@ import { useEffect, useState } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import AddButton from "./AddButton";
+import { BiListPlus } from "react-icons/bi";
+import { fetchJobsAction } from "../redux/actions";
 
-const mapStateToProps = state => ({})
+const mapStateToProps = (state) => ({
+  jobsArray: state.jobsData.storage,  
+});
 
-const mapDispatchToProps = (dispatch) =>({
-
-     addToFavs: () => {
-        
-      dispatch({
-        type: "ADD_TO_FAVS",
-      })
-
-     }
+const mapDispatchToProps = (dispatch) => ({
+  getJobs: () => {
+      dispatch(fetchJobsAction())
+  }
 })
 
 
- function Home() {
+
+function Home(props) {
   const [jobs, setJobs] = useState(); //the state should be first undefined in order to render the object properly with a coditional(line 47)
   const [search, setSearch] = useState("");
 
-  const fetchJobs = async (search = "developer") => {
-    try {
-      let response = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?search=${search}&limit=10`
-      );
-      console.log("response", response);
-      if (response.ok) {
-        let jobs = await response.json();
-        setJobs(jobs);
-        console.log("myData", jobs);
-      } else {
-        console.log("something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSearch = (e) => {
+    const handleSearch = (e) => {
     setSearch(e.target.value);
-    fetchJobs(e.target.value); // develo
+    // develo
   };
 
   useEffect(() => {
-    fetchJobs();
+    props.getJobs()
   }, []);
 
   return (
@@ -80,11 +61,11 @@ const mapDispatchToProps = (dispatch) =>({
           </Col>
         </Row>
       </Container>
-        
-        {/* <Jobs JobData={jobs}/> */}
+      
+     <Link to="/favorites"><h2>Favourites</h2></Link> 
       <div>
-        {jobs &&
-          jobs.data
+        {props.jobsArray &&
+          props.jobsArray
             .filter((job) => true || job.title.toLowerCase().includes(search))
             .map((job) => (
               <Container
@@ -105,7 +86,23 @@ const mapDispatchToProps = (dispatch) =>({
                         <h3 style={{ color: "salmon" }}>{job.company_name}</h3>
                       </Link>
 
-                     <AddButton/>
+                      <span>
+                        <button onClick={() => props.addToFavs(job)}
+                          style={{
+                            border: "none",
+                            backgroundColor: "transparent",
+                          }}
+                        >
+                          <BiListPlus
+                            style={{
+                              color: "white",
+                              width: "50px",
+                              height: "50px",
+                              marginLeft: "10px",
+                            }}
+                          />
+                        </button>
+                      </span>
                     </div>
                     <h3>{job.category}</h3>
                     <h6>{job.candidate_required_location}</h6>
@@ -118,5 +115,4 @@ const mapDispatchToProps = (dispatch) =>({
   );
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

@@ -8,11 +8,13 @@ import Favs from "./Components.jsx/Favs";
 
 function App() {
   return (
+
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:companyName" element={<SearchCompanyName/>} />
-        <Route path="/favourites"   element={<Favs/>} />
+        <Route path="/favorites"   element={<Favs/>} />
       </Routes>
     </BrowserRouter>
   );
