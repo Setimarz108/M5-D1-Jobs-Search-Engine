@@ -11,8 +11,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getJobs: () => {
-      dispatch(fetchJobsAction())
+  getJobs: (search) => {
+      dispatch(fetchJobsAction(search))
   }
 })
 
@@ -28,7 +28,7 @@ function Home(props) {
   };
 
   useEffect(() => {
-    props.getJobs()
+    props.getJobs("developer")
   }, []);
 
   return (
@@ -61,11 +61,11 @@ function Home(props) {
           </Col>
         </Row>
       </Container>
-      
+      <button onClick={() => props.getJobs(search)}>search</button>
      <Link to="/favorites"><h2>Favourites</h2></Link> 
       <div>
-        {props.jobsArray &&
-          props.jobsArray
+        {jobs &&
+          jobs.data
             .filter((job) => true || job.title.toLowerCase().includes(search))
             .map((job) => (
               <Container

@@ -13,7 +13,7 @@ export const deleteFromFavorites = (index) => ({
   })
 
 
-  export const fetchJobsAction = () => async (dispatch) => {
+  export const fetchJobsAction = (search) => async (dispatch) => {
 
         try {
             let response = await fetch(

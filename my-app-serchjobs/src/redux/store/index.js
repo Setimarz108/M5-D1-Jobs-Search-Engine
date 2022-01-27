@@ -13,15 +13,14 @@ export const initialState ={
         favJobs : []
     },
 
-    jobsData:{
-         
+    jobsData:{         
         storage: [],
     }
 }
 
 const reducerMixer = combineReducers({
     favorites: favoritesReducer,
-    jobsData: jobsDataReducer
+    jobsData: jobsDataReducer,
 })
 
 let configStore =createStore(
