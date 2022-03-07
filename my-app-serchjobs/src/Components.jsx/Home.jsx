@@ -7,7 +7,7 @@ import { BiListPlus } from "react-icons/bi";
 import { fetchJobsAction } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
-  jobsArray: state.jobsData.storage,  
+  jobs: jobs,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -19,12 +19,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 function Home(props) {
-  const [jobs, setJobs] = useState(); //the state should be first undefined in order to render the object properly with a coditional(line 47)
+
   const [search, setSearch] = useState("");
 
     const handleSearch = (e) => {
     setSearch(e.target.value);
-    // develo
+    
   };
 
   useEffect(() => {
@@ -64,8 +64,7 @@ function Home(props) {
       <button onClick={() => props.getJobs(search)}>search</button>
      <Link to="/favorites"><h2>Favourites</h2></Link> 
       <div>
-        {jobs &&
-          jobs.data
+        {jobs.jobs?.data && jobs.jobs?.data
             .filter((job) => true || job.title.toLowerCase().includes(search))
             .map((job) => (
               <Container

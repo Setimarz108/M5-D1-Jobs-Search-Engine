@@ -1,8 +1,8 @@
 import { createStore,combineReducers, applyMiddleware, compose} from "redux";
 import favoritesReducer from "../reducers/favoritesReducer";
-
 import thunk from 'redux-thunk'
-import jobsDataReducer from "../reducers/jobsDataReducer";
+import jobsReducer from "../reducers/jobsReducer";
+
 
 const composeThatAlwaysWorks = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -13,14 +13,12 @@ export const initialState ={
         favJobs : []
     },
 
-    jobsData:{         
-        storage: [],
-    }
+   jobs:[]
 }
 
 const reducerMixer = combineReducers({
     favorites: favoritesReducer,
-    jobsData: jobsDataReducer,
+    jobs: jobsReducer
 })
 
 let configStore =createStore(

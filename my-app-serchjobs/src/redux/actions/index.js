@@ -24,9 +24,9 @@ export const deleteFromFavorites = (index) => ({
               let jobs = await response.json();
               dispatch({
                   type: FETCH_JOBS,
-                  payload: jobs
+                  payload: jobs.data
               })
-              console.log("myData", jobs);
+              console.log("myData", jobs.data);
             } else {
               console.log("something went wrong");
             }

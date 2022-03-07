@@ -1,7 +1,7 @@
 import { initialState } from "../store";
 import { FETCH_JOBS } from "../actions";
 
-const jobsDataReducer = (state = initialState.jobsData, action) => {
+const jobsReducer = (state = initialState.jobs, action) => {
   switch (action.type) {
     case FETCH_JOBS:
       return {
@@ -13,4 +13,4 @@ const jobsDataReducer = (state = initialState.jobsData, action) => {
   }
 };
 
-export default jobsDataReducer;
+export default jobsReducer;
